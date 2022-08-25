@@ -16,9 +16,23 @@
 
 package com.codelab.basics.ui
 
+import androidx.annotation.ColorLong
 import androidx.compose.ui.graphics.Color
 
 val Navy = Color(0xFF073042)
 val Blue = Color(0xFF4285F4)
 val LightBlue = Color(0xFFD7EFFE)
 val Chartreuse = Color(0xFFEFF7CF)
+
+
+
+@ColorLong
+val i : Long = 0xFFFFE640F5
+
+//colorLong을 parameter로 받아서 사용
+val purple1 = Color(0xFF6357EB)
+val purple2 = Color(0xFF885BF5)
+val purple3 = Color(0xFF9E5EDE)
+val purple4 = Color(0xFFC85BF5)
+val purple5 = Color(0xFFE640F5)
+

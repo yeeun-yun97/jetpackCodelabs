@@ -23,6 +23,7 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
+// 사용할 Colors
 private val DarkColorPalette = darkColors(
     surface = Blue,
     onSurface = Navy,
@@ -37,6 +38,7 @@ private val LightColorPalette = lightColors(
     onPrimary = Navy
 )
 
+// Theme
 @Composable
 fun BasicsCodelabTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -54,4 +56,8 @@ fun BasicsCodelabTheme(
         shapes = shapes,
         content = content
     )
+
+
+
+
 }

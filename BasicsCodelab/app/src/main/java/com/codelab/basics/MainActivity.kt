@@ -53,6 +53,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codelab.basics.ui.BasicsCodelabTheme
+import com.codelab.basics.ui.typography
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +77,12 @@ private fun MyApp() {
     }
 }
 
+
+@Composable
+fun CustomText(text:String){
+    Text("", style = typography.h5)
+}
+
 @Composable
 private fun OnboardingScreen(onContinueClicked: () -> Unit) {
     Surface {
@@ -97,6 +104,9 @@ private fun OnboardingScreen(onContinueClicked: () -> Unit) {
 
 @Composable
 private fun Greetings(names: List<String> = List(1000) { "$it" } ) {
+    //recyclerView와 같은 반복된 뷰를 그릴때 사용: LazyColumn
+    //화면에 보이는 부분만 렌더링하여 성능을 향상
+    //하위 뷰를 재사용하기보다는 새로 방출하면서도 성능을 유지할 수 있다고 함
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
         items(items = names) { name ->
             Greeting(name = name)
@@ -106,6 +116,7 @@ private fun Greetings(names: List<String> = List(1000) { "$it" } ) {
 
 @Composable
 private fun Greeting(name: String) {
+    //Card 카드
     Card(
         backgroundColor = MaterialTheme.colors.primary,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
@@ -116,11 +127,17 @@ private fun Greeting(name: String) {
 
 @Composable
 private fun CardContent(name: String) {
+
+    //dont : composable cannot know 변화
+    //var expanded = false
+    //dont : recomposition problem
+    //var expanded = mutableStateOf(false)
     var expanded by remember { mutableStateOf(false) }
 
     Row(
         modifier = Modifier
             .padding(12.dp)
+            //여기서 애니메이션 설정함.
             .animateContentSize(
                 animationSpec = spring(
                     dampingRatio = Spring.DampingRatioMediumBouncy,
@@ -140,6 +157,7 @@ private fun CardContent(name: String) {
                     fontWeight = FontWeight.ExtraBold
                 )
             )
+            // state 값을 바탕으로 값이 들어가거나 안 들어가거나 함
             if (expanded) {
                 Text(
                     text = ("Composem ipsum color sit lazy, " +
@@ -147,6 +165,7 @@ private fun CardContent(name: String) {
                 )
             }
         }
+        // state 값을 넘기기보다 그 값을 변화시키는 이벤트 핸들러를 넘겨서 사용.
         IconButton(onClick = { expanded = !expanded }) {
             Icon(
                 imageVector = if (expanded) Filled.ExpandLess else Filled.ExpandMore,
@@ -163,11 +182,12 @@ private fun CardContent(name: String) {
 
 @Preview(
     showBackground = true,
+    //preview의 크기를 조절할 수 있다.
     widthDp = 320,
+    // 테마를 어둡게 할지 밝게 할지 설정 가능
     uiMode = UI_MODE_NIGHT_YES,
     name = "DefaultPreviewDark"
 )
-@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun DefaultPreview() {
     BasicsCodelabTheme {

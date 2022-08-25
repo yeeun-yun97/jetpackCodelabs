@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+// 텍스트 스타일
 // Set of Material typography styles to start with
 val typography = Typography(
     body1 = TextStyle(
